@@ -6,6 +6,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "eleventy",
+    "build-ghpages": "npx @11ty/eleventy --pathprefix=macroscopicentric.github.io",
     "start": "npm run watch:eleventy & npm run watch:sass",
     "watch:eleventy": "eleventy --serve",
     "watch:sass": "sass assets/scss:_site/assets/css --watch"
