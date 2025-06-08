@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Macroscopicentric</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+
+    <!-- Come and get me RSS readers -->
+    <link rel="alternate" type="application/rss+xml" title="Macroscopicentric" href="https://macroscopicentric.net"/>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <!-- External stylesheet for Prism's syntax highlighting -->
+    <link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-solarizedlight.css" />
+    <!--[if IE 8]><link rel="stylesheet" href="/assets/css/ie.css"><![endif]-->
+    <link rel="canonical" href="https://macroscopicentric.net/blog/migrating-to-eleventy">
+</head>
+
+
+<body>
+
+    <div class="header">
+     <div class="container">
+         <h1 class="logo"><a href="/">Macroscopicentric</a></h1>
+         <nav class="nav-collapse">
+             <ul class="noList">
+             
+             <li>
+                 <a href="/index.html">Home</a>
+             </li> 
+            
+             <li>
+                 <a href="/about">About</a>
+             </li> 
+            
+             <li>
+                 <a href="/feed.xml">RSS</a>
+             </li> 
+            
+             </ul>
+         </nav>
+     </div>
+ </div><!-- end .header -->
+
+
+   <div class="content">
+      <div class="container">
+         <div class="post">
+  
+  <h1 class="postTitle">Migrating from Jekyll to Eleventy</h1>
+  <p class="meta">June 08, 2025</p>
+  
+  <h2>TL;DR: Just the Migration Steps</h2>
+<ol>
+<li>add package.json and eleventy.config.cjs (see above)</li>
+<li>point layouts to <code>_layouts</code> in eleventy.config.cjs</li>
+<li>convert <code>_config.yml</code> to <code>_data/site.json</code></li>
+<li>delete config.rb</li>
+<li>add .eleventyignore to ignore this readme</li>
+<li>replace my <code>jekyll-feed</code> RSS plugin with eleventy's <a href="https://www.11ty.dev/docs/plugins/rss/"><code>rss</code></a> plugin</li>
+<li>add <code>_posts.json</code> and a permalink to the about page</li>
+<li>delete a bunch of js and sass install eleventy's syntax highlighting plugin and update my code blocks</li>
+<li>for eleventy 3: update the page links for the index + pagination</li>
+<li>add a GH workflow, .nojekyll file, update repo settings in GH</li>
+<li>verify domain through GH user settings</li>
+</ol>
+<h2>The Longer Version</h2>
+<p><em>For context: I started this process in January 2024 and finished in June 2025, hurrah personal projects, so there are references to Eleventy 2.0 below from before I migrated to 3.0.</em></p>
+<p>I don't think there's a super clean config migration path from Jekyll to Eleventy but I might've also been underusing Jekyll's config. Per <a href="https://alex.pearwin.com/2020/06/jekyll-to-eleventy/">this blog post</a> I moved my <code>_config.yml</code> (site-wide config) to <code>_data/site.json</code>, and then had to decide what to do about build config, which I didn't really have an equivalent for in Jekyll (I did have a config.rb, but it was minimal and I just deleted it). Eleventy currently (as of January 2024) <a href="https://www.11ty.dev/docs/config/">has three config filename options</a> for build config. I tried using <code>eleventy.config.js</code> and specifying <code>&quot;type&quot;: &quot;module&quot;</code> in my package.json settings per the recommendation of a friend, but that caused Eleventy to fatal. <a href="https://www.11ty.dev/blog/canary-eleventy-v3/#new-features-and-a-short-upgrade-guide">It looks like Eleventy is trying to migrate away from CJS</a> but that work isn't yet complete, so I was able to leave the module type but did have to change to a <code>.cjs</code> extension for the config file.</p>
+<p>Layouts are called layouts in 11ty's config and Jekyll's default pathing, but 11ty's path for them points to <code>_includes/</code> by default, which honestly seems kind of weird to me as a design choice. I've configured it in the general config file to just point to <code>_layouts/</code> as it did in Jekyll.</p>
+<p>I also, for some reason I don't remember, had separate <code>_layouts</code> AND <code>_includes</code> directories, and my html page fragments (head, header, footer) were in <code>_includes</code>, which made this especially confounding. It's at this point that I started enthusiastically copying from Alex Pearce's <a href="https://github.com/alexpearce/home">blog code</a> and I realized the syntax within the Liquid templating was different so I copied his and it just worked.</p>
+<p>I then got stuck on my included scripts, which are probably absolute garbage and definitely include a fair amount of jquery (a combo of what's included by default by Jekyll and the theme I'd picked) but while commenting them out did finally make the blog serve locally, it also changed the location of my header text as well as the font used for the header and headings. (No posts appear yet.) So at this point I want to make this just work with my existing jquery for the theme and then update this later.</p>
+<p>There's also some pathing wonkiness happening. Eleventy is turning my pathing for posts (which was &quot;/blog/{page slug}/&quot;) into &quot;/blog/{page slug}/index.html&quot;, which I think was my fault for the trailing slash, as Eleventy seems to turn those into directories. Removing the trailing slash makes the files end up in <code>_site</code> in the expected location, although they now have no file extension and I'm not sure if that's what Eleventy expects (even though they're properly formatted HTML). Similarly, my about page was going to &quot;/about/index.html&quot;. Deleting that file/directory and adding a permalink to about.md's front matter does fix the pathing, but now Eleventy can't seem to find the top-level (also without a file extension) about page. This is fixed now and then there were also some surprising things about front matter namespacing. I gained a lot by simply copying from <a href="https://github.com/alexpearce/home/tree/eb2dfb5d20d5f1d59c278e57de453280f74aa252">Alex Pearwin's code</a> for <em>his</em> Eleventy blog. My original (Jekyll's original?) pathing choices were even wackier, though, as my blog home <em>is</em> my index.html but then every next page of blog posts is at &quot;/blog/page{number}&quot;, so I had to make a pretty goofy conditional to ensure the permalinks.</p>
+<p>I don't think I fully understand Eleventy's assumed pathing because making an html file called &quot;about&quot; at the top level meant Eleventy couldn't find it. But making the permalink &quot;about.html&quot; but linking to it everywhere else in the templates as &quot;/about&quot; seems to work just fine (the URL is just &quot;/about&quot;).</p>
+<p>There was also definitely something wonky happening with Sass, which worked out of the box with Jekyll, but in this way where I have no idea what Ruby libraries it was using and I think I deleted all my Ruby config, so I needed to go look those up. I've installed the npm versions of Compass and Normalize but something had troubles finding Compass anyway. This is probably worth just blowing away and redoing from scratch since I have the final CSS I currently care about anyway. Also, I'm terrible at SASS. I was able to just delete Compass altogether and move to a NPM package for vanilla Normalize CSS, but Susy will need to get converted into native CSS as well.</p>
+<p>A later update the above: this definitely isn't everything but Compass was Ruby code that is totally unsupported and no longer works with modern Ruby so I've excised that entirely, but my understanding of CSS and SASS isn't good enough to figure out where it was being used and how extensively. So I've just started with deleting the import. <a href="https://jkc.codes/blog/using-sass-with-eleventy/">This blog post</a> for using Sass with Eleventy was extremely helpful for setting everything up in the interim.</p>
+<p>The last major thing was that I think either the entire template engine for Markdown or some of its config is different than what Jekyll used, because posts look mostly fine except for code blocks. The docs were pretty useful on this once I realized <a href="https://www.11ty.dev/docs/plugins/syntaxhighlight/">it's a plugin</a>, but I got there via <a href="https://nicolashery.com/moving-a-blog-from-jekyll-to-eleventy/#syntax-highlighting">yet another blog post</a>, and then I had to go to the Prism docs to figure out file pathing off of one of the CDNs for the theme I wanted.</p>
+<p>Interestingly, although I did a lot of work earlier to maintain my pathing from Jekyll, upgrading to Eleventy 3 actually caused build errors because I have so many pages that don't have extensions, which Eleventy really doesn't seem to like but (IIRC, because I don't think I would've changed it) was a default in Jekyll. I've compromised by removing the very silly conditional I mentioned above to try to maintain the pathing on the paginated blog pages after the index, but have exempted all posts via additional config in <code>_posts.json</code> to try to keep the links consistent. I may regret this in the future, we'll see, but I'd really like to not break the historical blog links.</p>
+<p>Finally, I had a bunch of issues deploying this via Github actions because I'd been using Jekyll for so long that the entire pipeline was automagical to me. In general <a href="https://www.11ty.dev/docs/deployment/">the Eleventy deployment docs</a> were extremely helpful and have specific config for your workflow since that's such a common use case. The one thing they didn't mention was that you also needed a <code>.nojekyll</code> file at the top level of your repo if you were coming from Jekyll, but there are a plethora of blog posts mentioning this (ex: <a href="https://www.linkedin.com/pulse/eleventy-github-pages-lea-tortay/">Lea Tortay's blog post</a>, which is commonly referenced, so that was easy to fix. I did miss an incredibly important step the first time, which was updating my repo settings to deploy from the gh-pages branch and not main. I also did not use <code>--pathprefix</code>, which is included in a lot of the guides, because I deploy this at the top level of my GH pages. I do recommend adding <code>workflow_dispatch</code> into your GH workflow triggers so you can retry it from the GH actions UI. Ex:</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">on</span><span class="token punctuation">:</span>
+  <span class="token key atrule">push</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branches</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> main
+  <span class="token key atrule">workflow_dispatch</span><span class="token punctuation">:</span></code></pre>
+<p>I then had an incredibly confusing DNS issue, where I could see the blog at macroscopicentric.github.io but my own domain (macroscopicentric.net) gave me a Github Pages 404 instead. I'm truly not sure what actually caused this to go away, because I already had CNAME config set up in my GH workflow and that didn't seem to be working (where the same CNAME had worked with Jekyll). But I did two things: I verified the domain through my user settings on Github and added the domain to the repo's GH Pages settings, and then I deleted the domain from the repo's GH Pages settings and re-ran my action, which recreated it. I'm assuming it was the domain verification that solved my problem, but it also feels possible that there was some sort of bizarro caching problem at the DNS level from GH because my blog has been around so long with an unchanged CNAME. If anyone has a better idea of what might've happened here, I'd love to hear it!</p>
+
+
+  <!-- POST NAVIGATION -->
+  <div class="postNav clearfix">
+      
+     
+  </div>
+</div>
+
+      </div>
+   </div><!-- end .content -->
+
+   <div class="footer">
+   <div class="container">
+      <p class="copy">Powered by <a href="https://www.11ty.dev/">Eleventy</a></p>
+
+      <div class="footer-links"> 
+         <ul class="noList"> 
+            
+            
+            <li><a href="https://twitter.com/magpieohmy">
+                  <svg id="twitter" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" style="height: 30px; width: 30px;"><circle class="outer-shape" cx="50" cy="50" r="48" style="opacity: 1;"></circle>
+                  <path class="inner-shape" style="opacity: 1;" transform="translate(25,25) scale(0.5)" d="M99.001,19.428c-3.606,1.608-7.48,2.695-11.547,3.184c4.15-2.503,7.338-6.466,8.841-11.189 c-3.885,2.318-8.187,4-12.768,4.908c-3.667-3.931-8.893-6.387-14.676-6.387c-11.104,0-20.107,9.054-20.107,20.223 c0,1.585,0.177,3.128,0.52,4.609c-16.71-0.845-31.525-8.895-41.442-21.131C6.092,16.633,5.1,20.107,5.1,23.813 c0,7.017,3.55,13.208,8.945,16.834c-3.296-0.104-6.397-1.014-9.106-2.529c-0.002,0.085-0.002,0.17-0.002,0.255 c0,9.799,6.931,17.972,16.129,19.831c-1.688,0.463-3.463,0.71-5.297,0.71c-1.296,0-2.555-0.127-3.783-0.363 c2.559,8.034,9.984,13.882,18.782,14.045c-6.881,5.424-15.551,8.657-24.971,8.657c-1.623,0-3.223-0.096-4.796-0.282 c8.898,5.738,19.467,9.087,30.82,9.087c36.982,0,57.206-30.817,57.206-57.543c0-0.877-0.02-1.748-0.059-2.617 C92.896,27.045,96.305,23.482,99.001,19.428z"></path>
+                  </svg>
+            </a></li>
+            
+            
+            <li><a href="https://github.com/macroscopicentric">
+                  <svg id="github" class="custom-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" style="height: 30px; width: 30px;"><circle class="outer-shape" cx="50" cy="50" r="48" style="opacity: 1;"></circle>
+                  <path class="inner-shape" style="opacity: 1;" transform="translate(25,25) scale(0.5)" d="M50,1C22.938,1,1,22.938,1,50s21.938,49,49,49s49-21.938,49-49S77.062,1,50,1z M79.099,79.099 c-3.782,3.782-8.184,6.75-13.083,8.823c-1.245,0.526-2.509,0.989-3.79,1.387v-7.344c0-3.86-1.324-6.699-3.972-8.517 c1.659-0.16,3.182-0.383,4.57-0.67c1.388-0.287,2.855-0.702,4.402-1.245c1.547-0.543,2.935-1.189,4.163-1.938 c1.228-0.75,2.409-1.723,3.541-2.919s2.082-2.552,2.847-4.067s1.372-3.334,1.818-5.455c0.446-2.121,0.67-4.458,0.67-7.01 c0-4.945-1.611-9.155-4.833-12.633c1.467-3.828,1.308-7.991-0.478-12.489l-1.197-0.143c-0.829-0.096-2.321,0.255-4.474,1.053 c-2.153,0.798-4.57,2.105-7.249,3.924c-3.797-1.053-7.736-1.579-11.82-1.579c-4.115,0-8.039,0.526-11.772,1.579 c-1.69-1.149-3.294-2.097-4.809-2.847c-1.515-0.75-2.727-1.26-3.637-1.532c-0.909-0.271-1.754-0.439-2.536-0.503 c-0.782-0.064-1.284-0.079-1.507-0.048c-0.223,0.031-0.383,0.064-0.478,0.096c-1.787,4.53-1.946,8.694-0.478,12.489 c-3.222,3.477-4.833,7.688-4.833,12.633c0,2.552,0.223,4.889,0.67,7.01c0.447,2.121,1.053,3.94,1.818,5.455 c0.765,1.515,1.715,2.871,2.847,4.067s2.313,2.169,3.541,2.919c1.228,0.751,2.616,1.396,4.163,1.938 c1.547,0.543,3.014,0.957,4.402,1.245c1.388,0.287,2.911,0.511,4.57,0.67c-2.616,1.787-3.924,4.626-3.924,8.517v7.487 c-1.445-0.43-2.869-0.938-4.268-1.53c-4.899-2.073-9.301-5.041-13.083-8.823c-3.782-3.782-6.75-8.184-8.823-13.083 C9.934,60.948,8.847,55.56,8.847,50s1.087-10.948,3.231-16.016c2.073-4.899,5.041-9.301,8.823-13.083s8.184-6.75,13.083-8.823 C39.052,9.934,44.44,8.847,50,8.847s10.948,1.087,16.016,3.231c4.9,2.073,9.301,5.041,13.083,8.823 c3.782,3.782,6.75,8.184,8.823,13.083c2.143,5.069,3.23,10.457,3.23,16.016s-1.087,10.948-3.231,16.016 C85.848,70.915,82.88,75.317,79.099,79.099L79.099,79.099z"></path>
+                  </svg>
+            </a></li>
+             
+            
+         </ul>
+      </div>
+   </div>
+</div><!-- end .footer -->
+
+
+   <!-- Add jQuery and other scripts -->
+<!--
+    Yes I would like to delete this, why are we using jQuery in the
+    year of our lord 2024, but it's doing positioning and font
+    shenanigans and I would like to get the blog working before fussing with aesthetics, and by aesthetics I mean "not using jQuery."
+-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="/assets/js/dropcap.min.js"></script>
+<script src="/assets/js/responsive-nav.min.js"></script>
+<script src="/assets/js/scripts.js"></script>
+
+
+</body>
+
+</html>
