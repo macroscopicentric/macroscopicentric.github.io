@@ -7,7 +7,7 @@
     <language>en</language>
     <item>
       <title>Migrating from Jekyll to Eleventy</title>
-      <link>https://macroscopicentric.net/blog/migrating-to-eleventy</link>
+      <link>https://macroscopicentric.net/blog/migrating-to-eleventy/</link>
       <description>&lt;h2&gt;TL;DR: Just the Migration Steps&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;add package.json and eleventy.config.cjs (see above)&lt;/li&gt;
@@ -44,11 +44,11 @@
 </description>
       <pubDate>Sun, 08 Jun 2025 18:36:00 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/migrating-to-eleventy</guid>
+      <guid>https://macroscopicentric.net/blog/migrating-to-eleventy/</guid>
     </item>
     <item>
       <title>Zsh Prompt Editing</title>
-      <link>https://macroscopicentric.net/blog/zsh-prompt-config</link>
+      <link>https://macroscopicentric.net/blog/zsh-prompt-config/</link>
       <description>&lt;p&gt;I finally switched my default shell on my laptop (Mac) from bash to zsh. I&#39;d never bothered tinkering with a more sophisticated shell before this, so it was interesting to figure out what zsh could do. But I was frustrated because I had a nice prompt in bash, and it took me a while to recreate it.&lt;/p&gt;
 &lt;p&gt;My bash prompt was pretty simple, it included my current directory, then my git branch, then status indicators for different types of dirty state in a git repo (specifically, staged vs. unstaged changes). It also used to have a unicode crown emoji, but after working with bash on a lot of hosts with older versions of bash that didn&#39;t do well with unicode, I&#39;d pulled the crown out years ago. (I was hopeful that I could add it back in, at least for my personal computer!)&lt;/p&gt;
 &lt;p&gt;(Sidenote: I looked into oh-my-zsh and then decided it was too complicated as a framework for my needs, so I&#39;ll be ignoring it here.)&lt;/p&gt;
@@ -91,11 +91,11 @@ setopt prompt_subst
 </description>
       <pubDate>Tue, 14 Mar 2023 17:53:00 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/zsh-prompt-config</guid>
+      <guid>https://macroscopicentric.net/blog/zsh-prompt-config/</guid>
     </item>
     <item>
       <title>An Introduction to Command-Line Unix Tools</title>
-      <link>https://macroscopicentric.net/blog/unix-tools</link>
+      <link>https://macroscopicentric.net/blog/unix-tools/</link>
       <description>&lt;p&gt;I&#39;m relatively new to Unix tools, and when I began, I was frustrated because I felt like the only way I knew how to find new tools was to ask people with more experience. The goal of this post is to provide some starting places if you&#39;d like to learn more about what you can do on the command line, but it&#39;s not intended to be an exhaustive list.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;code&gt;apropos&lt;/code&gt; - I&#39;m listing this one first because hopefully it will help you find others! Searches your man pages for the keyword(s) you pass into it. Ex: &lt;code&gt;apropos networking&lt;/code&gt; will search for man pages that include the word &amp;quot;networking.&amp;quot;&lt;/li&gt;
@@ -113,11 +113,11 @@ setopt prompt_subst
 </description>
       <pubDate>Thu, 01 Sep 2016 22:23:48 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/unix-tools</guid>
+      <guid>https://macroscopicentric.net/blog/unix-tools/</guid>
     </item>
     <item>
       <title>Using Other People&#39;s Code</title>
-      <link>https://macroscopicentric.net/blog/other-peoples-code</link>
+      <link>https://macroscopicentric.net/blog/other-peoples-code/</link>
       <description>&lt;p&gt;Including other people&#39;s code in your program means you don&#39;t have to write everything from scratch. You don&#39;t have to solve every problem on your own, and it&#39;s often faster and more efficient to use something off the shelf. There are three ways to include other people&#39;s code in what you&#39;re doing.&lt;/p&gt;
 &lt;p&gt;The first is something you already do: using the core of a programming language. If you&#39;re using Python, for example, every time you use &lt;code&gt;import&lt;/code&gt;, &lt;code&gt;for&lt;/code&gt;, or &lt;code&gt;return&lt;/code&gt;, you&#39;re using code other people have written. These specific examples are called keywords, and you can easily find a list of &lt;a href=&quot;http://www.programiz.com/python-programming/keyword-list&quot;&gt;all Python keywords&lt;/a&gt; online. Other examples of things in Python&#39;s core include its basic data types, such as strings, lists, and dictionaries, and all the methods you can use on those types.&lt;/p&gt;
 &lt;p&gt;In addition to a language&#39;s core, however, there&#39;s also the language&#39;s standard library. A standard library is a collection of modules that come prepackaged with your language. When the programming language was installed on your computer, everything in the standard library was installed with it. The standard library comes ready to use. All you have to do is include the module you want to use at the top of your file. In Python, one module in the standard library that often comes in handy is the &lt;code&gt;collections&lt;/code&gt; module. Once you import the &lt;code&gt;collections&lt;/code&gt; module, you can use any data type from within it, such as its &lt;code&gt;OrderedDict&lt;/code&gt; and &lt;code&gt;defaultdict&lt;/code&gt;. (I highly recommend &lt;a href=&quot;https://pymotw.com/3/&quot;&gt;Python Module of the Week&lt;/a&gt; if you want to know more about what&#39;s part of Python&#39;s standard library.) So you could do something like:&lt;/p&gt;
@@ -137,11 +137,11 @@ example &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; defaultdict&
 </description>
       <pubDate>Mon, 25 Jan 2016 22:08:00 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/other-peoples-code</guid>
+      <guid>https://macroscopicentric.net/blog/other-peoples-code/</guid>
     </item>
     <item>
       <title>Educational Resources for Beginners in Python</title>
-      <link>https://macroscopicentric.net/blog/resources-for-beginners</link>
+      <link>https://macroscopicentric.net/blog/resources-for-beginners/</link>
       <description>&lt;p&gt;This list is mostly Python-specific since that&#39;s how I learned to program, but some of these resources are language-agnostic. Feel free to try some out and then drop them if they don&#39;t work for you! The important thing is that you&#39;re learning, so find a learning tool that fits your style and needs.&lt;/p&gt;
 &lt;h2&gt;Websites&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;http://teamtreehouse.com/&quot;&gt;Treehouse&lt;/a&gt; and &lt;a href=&quot;http://www.lynda.com/default.aspx&quot;&gt;Lynda&lt;/a&gt; are both subscription websites that have tons of educational videos and practice material for you to follow along. I&#39;ve never used Lynda for this purpose, but Treehouse is beginner-friendly and covers a lot of topics, has forums to ask questions if you get stuck, and has workspaces where you can write and run code on the website instead of needing to store it on your computer. Treehouse also has &lt;a href=&quot;http://blog.teamtreehouse.com/&quot;&gt;a blog&lt;/a&gt; you can see without having an account and might have some helpful information.&lt;/p&gt;
@@ -162,11 +162,11 @@ example &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; defaultdict&
 </description>
       <pubDate>Sun, 24 Jan 2016 11:13:00 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/resources-for-beginners</guid>
+      <guid>https://macroscopicentric.net/blog/resources-for-beginners/</guid>
     </item>
     <item>
       <title>Configuration Management for Beginners</title>
-      <link>https://macroscopicentric.net/blog/config-management</link>
+      <link>https://macroscopicentric.net/blog/config-management/</link>
       <description>&lt;h2&gt;Using Chef as an Example&lt;/h2&gt;
 &lt;h3&gt;Who is this blog post meant for?&lt;/h3&gt;
 &lt;p&gt;This post is aimed at software engineers who have used configuration management software (especially Chef) without necessarily being comfortable with the process or fully understanding what they were doing. I spend a lot of time working with Chef in my day job, and frequently explain what&#39;s happening behind the scenes to software engineers in other sections of the engineering org who rarely make Chef changes. This blog post is a distillation of how I normally explain what configuration changes they&#39;re making and why.&lt;/p&gt;
@@ -203,11 +203,11 @@ example &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; defaultdict&
 </description>
       <pubDate>Sat, 23 Jan 2016 16:17:00 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/config-management</guid>
+      <guid>https://macroscopicentric.net/blog/config-management/</guid>
     </item>
     <item>
       <title>What is Object-Oriented Programming?</title>
-      <link>https://macroscopicentric.net/blog/object-oriented</link>
+      <link>https://macroscopicentric.net/blog/object-oriented/</link>
       <description>&lt;p&gt;Object-oriented programming is the idea that data has its own identity and methods so it can do things for itself, instead of a workflow where functions do things &lt;em&gt;to&lt;/em&gt; the data. The main goal here is delegation: you can tell an object what you want it to do, but you don&#39;t have to worry about the details of &lt;em&gt;how&lt;/em&gt; it will accomplish what you want. This allows you to decouple (remove unnecessary dependencies) your code. Decoupling your code means you can change the implementation of an object&#39;s method without needing to change the code calling that method, and vice versa. (If you found this explanation confusing, here&#39;s a &lt;a href=&quot;https://www.quora.com/What-is-object-oriented-programming?share=1&quot;&gt;Quora post&lt;/a&gt; that tries to answer the same question.)&lt;/p&gt;
 &lt;p&gt;In practice, object-oriented programming works by creating classes that have variables and methods, then creating instances of that class that store different information in the variables but have similar ways of interacting with it through the methods. You can have a lot of instances of the same class, so a common metaphor is to explain a class as a rubber stamp, and instances of that class like the images created by the rubber stamp. I like to compare classes to the Platonic ideal.* A class is a Platonic ideal of an object, and instances are actual working examples of the class. Like the Platonic ideal of a thing, a class is something you don&#39;t usually interact with directly. Instead, you make and then interact with instances of it. So if we use the example of a horse (a common example when explaining the Platonic ideal), you&#39;d have a class Horse, and then individual horse instances of Horse that contain slightly different data, or ideas of what a horse can be. Perhaps your Horse class contains variables for things like age, gender, color or breed, height, etc. Then you could have different instances of Horse with different configurations, such as &amp;quot;a pinto mare&amp;quot; or &amp;quot;a bay yearling&amp;quot; or &amp;quot;a grey stallion.&amp;quot; All these individual horses are still instances of Horse, so they all know how to do things that all horses should be able to do, like run. Putting all this together, we could write an example class and instance like this:&lt;/p&gt;
 &lt;pre class=&quot;language-py&quot;&gt;&lt;code class=&quot;language-py&quot;&gt;	&lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Horse&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
@@ -233,7 +233,7 @@ example &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; defaultdict&
 </description>
       <pubDate>Sat, 23 Jan 2016 16:17:00 +0000</pubDate>
       <dc:creator>magpieohmy</dc:creator>
-      <guid>https://macroscopicentric.net/blog/object-oriented</guid>
+      <guid>https://macroscopicentric.net/blog/object-oriented/</guid>
     </item>
   </channel>
 </rss>

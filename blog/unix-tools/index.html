@@ -23,7 +23,7 @@
     <!-- External stylesheet for Prism's syntax highlighting -->
     <link rel="stylesheet" href="https://unpkg.com/prismjs@1.20.0/themes/prism-solarizedlight.css" />
     <!--[if IE 8]><link rel="stylesheet" href="/assets/css/ie.css"><![endif]-->
-    <link rel="canonical" href="https://macroscopicentric.net/blog/other-peoples-code">
+    <link rel="canonical" href="https://macroscopicentric.net/blog/unix-tools/">
 </head>
 
 
@@ -57,25 +57,23 @@
       <div class="container">
          <div class="post">
   
-  <h1 class="postTitle">Using Other People's Code</h1>
-  <p class="meta">January 25, 2016</p>
+  <h1 class="postTitle">An Introduction to Command-Line Unix Tools</h1>
+  <p class="meta">September 01, 2016</p>
   
-  <p>Including other people's code in your program means you don't have to write everything from scratch. You don't have to solve every problem on your own, and it's often faster and more efficient to use something off the shelf. There are three ways to include other people's code in what you're doing.</p>
-<p>The first is something you already do: using the core of a programming language. If you're using Python, for example, every time you use <code>import</code>, <code>for</code>, or <code>return</code>, you're using code other people have written. These specific examples are called keywords, and you can easily find a list of <a href="http://www.programiz.com/python-programming/keyword-list">all Python keywords</a> online. Other examples of things in Python's core include its basic data types, such as strings, lists, and dictionaries, and all the methods you can use on those types.</p>
-<p>In addition to a language's core, however, there's also the language's standard library. A standard library is a collection of modules that come prepackaged with your language. When the programming language was installed on your computer, everything in the standard library was installed with it. The standard library comes ready to use. All you have to do is include the module you want to use at the top of your file. In Python, one module in the standard library that often comes in handy is the <code>collections</code> module. Once you import the <code>collections</code> module, you can use any data type from within it, such as its <code>OrderedDict</code> and <code>defaultdict</code>. (I highly recommend <a href="https://pymotw.com/3/">Python Module of the Week</a> if you want to know more about what's part of Python's standard library.) So you could do something like:</p>
-<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
-
-example <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token string">'marshmallow'</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span> example<span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span>  <span class="token comment"># 'marshmallow'</span></code></pre>
-<p>The third way to use people's code is to use external libraries. Perhaps you want to use use an external API, such as Twitter's API. One way you could interact with Twitter's API is by using Python's built-in module <code>urllib2</code>, which is part of the standard library:</p>
-<pre class="language-py"><code class="language-py">	<span class="token keyword">import</span> urllib2
-
-	response <span class="token operator">=</span> urllib2<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span><span class="token string">'http://twitter.com'</span><span class="token punctuation">)</span>
-	<span class="token keyword">print</span> response<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># list of headers from 'GET http://twitter.com'</span>
-	<span class="token keyword">print</span> response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># body of 'GET http://twitter.com'</span></code></pre>
-<p>You can absolutely use Twitter's API (or any other public API) this way, but it's tedious! It will take a lot of code to authenticate you, then even more to fetch and parse whatever data you want access to, whether it's your own tweets, or tweets including a certain keyword, or someone else's mentions, etc. Wouldn't it be neat if someone else had done all the repetitive, boring work of making authentication work and automatically parsing the response? This is where third-party libraries come in; <a href="https://dev.twitter.com/overview/api/twitter-libraries">lots of people</a> have already built external libraries that have abstracted out the repetitive parts of writing code to interact with the Twitter API. To use one, all you have to do is <code>pip install &lt;library name&gt;</code> from your terminal, and then import it into your file. Voila, you can now use someone else's third-party library from your own program!</p>
-<p>There are some hazards to using other people's code. Sometimes you might have compatibility issues, or perhaps the library you want to use hasn't been updated in a really long time. Pay attention to the libraries you use. How thorough is the README? Is there additional documentation? Do they look like they're being worked on regularly? Do they have an IRC channel where you can ask questions if you'd like?</p>
-<p>Using third-party libraries can mean trading convenience for behind-the-scenes complexity, and it may not always be worth it. If you're doing something simple, it might be better to use something from your language's standard library. But it's always good to know what other options exist.</p>
+  <p>I'm relatively new to Unix tools, and when I began, I was frustrated because I felt like the only way I knew how to find new tools was to ask people with more experience. The goal of this post is to provide some starting places if you'd like to learn more about what you can do on the command line, but it's not intended to be an exhaustive list.</p>
+<ol>
+<li><code>apropos</code> - I'm listing this one first because hopefully it will help you find others! Searches your man pages for the keyword(s) you pass into it. Ex: <code>apropos networking</code> will search for man pages that include the word &quot;networking.&quot;</li>
+<li><code>curl</code> - get data over a network, via basically any protocol you can think of. It has a LOT of flags and can do oodles of stuff. I once made a joke about how I'd be back in six hours after hunting through the curl docs to find the flag I needed. The joke was on me; it really did take me that long to read the entire man page. Ex: <code>curl http://www.example.com -v</code> will give you the HTTP response (including headers) for a GET to www.example.com. Alternative (Linux only): <code>wget</code>.</li>
+<li><code>netstat</code> - show network connections. Ex: <a href="https://writing.natwelch.com/post/581"><code>netstat -tunapl</code></a> (example is Linux only).</li>
+<li><code>ps</code> - list currently-running processes. Ex: <code>ps aux</code> will list all processes for all users, including the percentages of CPU and memory being used. Alternative: <code>pstree</code> is a Linux-only tool that will show you a graph of all parent/children process relationships.</li>
+<li><code>top</code> - live view of current processes, including things like CPU percentage.</li>
+<li><code>strace</code> (Linux only) - trace system calls. Alternative for Mac OSX: <a href="https://8thlight.com/blog/colin-jones/2015/11/06/dtrace-even-better-than-strace-for-osx.html"><code>dtrace</code></a>. I'm not going to explain this one too much because <a href="http://jvns.ca/">Julia Evans</a> wrote <a href="http://jvns.ca/strace-zine-unfolded.pdf">a great zine on it</a>. If you're not sure what system calls are, Julia's zine explains that too!</li>
+<li><code>/proc</code> (Linux only) - a virtual directory that keeps track of information related to currently running processes. Once you have a process's PID, you can go to <code>/proc/&lt;PID&gt;</code> to find a variety of info. Ex: <code>/proc/&lt;PID&gt;/fd</code> is a directory listing all of the file descriptors (files being touched) for the given process, and <code>/proc/&lt;PID&gt;/environ</code> is a file listing a process's environment.</li>
+</ol>
+<h4>Further Reading</h4>
+<p>The <a href="http://tldr-pages.github.io/">TLDR Pages</a> project has simplified explanations of the content of some man pages.</p>
+<p>If you're looking for something more exhaustive, the <a href="https://www.kernel.org/doc/man-pages/">Linux man-pages project</a> might help.</p>
+<p>Netflix has a great post on <a href="http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html">&quot;Linux Performance Analysis in 60 Seconds&quot;</a> with a list of Unix tools useful for troubleshooting performance issues.</p>
 
 
   <!-- POST NAVIGATION -->
