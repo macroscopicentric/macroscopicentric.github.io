@@ -5,7 +5,6 @@ pagination:
   size: 5
   alias: posts
   reverse: true
-permalink: "{% unless pagination.pageNumber > 0 %}index.html{% endunless %}{% if pagination.pageNumber > 0 %}blog/page{{ pagination.pageNumber | plus: 1 }}{% endif %}"
 ---
 
 <div class="home" id="home">
