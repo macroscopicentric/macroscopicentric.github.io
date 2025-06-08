@@ -3,7 +3,7 @@ name: Build Eleventy
 on:
   push:
     branches:
-      - main
+      - gh-pages-source
   workflow_dispatch:
 
 jobs:
