@@ -1,5 +1,4 @@
 {
     "layout": "post",
-    "permalink": "blog/{{ page.fileSlug }}",
-    "eleventyAllowMissingExtension": "true"
+    "permalink": "blog/{{ page.fileSlug }}/"
 }
