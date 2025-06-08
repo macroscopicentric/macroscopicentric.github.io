@@ -3,9 +3,9 @@ layout: static
 title: About
 permalink: "/about.html"
 ---
-I'm an infrastructure engineer and two-time [Recurser](https://recurse.com/) (S'14 and S'16) currently on a sabbatical after having most recently worked at Etsy. Some of my favorite things: cats, maple sugar candies, zines about witches and dumplings, Jorge Luis Borges, and unloseable video games as a form of relaxation. I always love to talk about fun wordplay and art coding projects!
+I'm a full-stack engineer and two-time [Recurser](https://recurse.com/) (S'14 and S'16) currently working at Rula, after most recently having worked at Etsy for six years on a wide variety of teams. Some of my favorite things: cats, maple sugar candies, zines about witches and dumplings, Jorge Luis Borges, and unloseable video games as a form of relaxation. I always love to talk about fun wordplay and art coding projects!
 
-Some of my favorite personal projects I've done:
+Some of my favorite toy projects I've done:
 
 - [Cat Nickname Generator](https://cat-gen.fly.dev) — A random cat nickname generator based on actual nicknames used by my actual roommates for their cat.
 
