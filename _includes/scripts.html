@@ -1,10 +1,13 @@
-<!-- Add jQuery and other scripts -->
-<!--
-    Yes I would like to delete this, why are we using jQuery in the
-    year of our lord 2024, but it's doing positioning and font
-    shenanigans and I would like to get the blog working before fussing with aesthetics, and by aesthetics I mean "not using jQuery."
--->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="{{ '/assets/js/dropcap.min.js' | prepend: site.baseurl }}"></script>
-<script src="{{ '/assets/js/responsive-nav.min.js' | prepend: site.baseurl }}"></script>
-<script src="{{ '/assets/js/scripts.js' | prepend: site.baseurl }}"></script>
+<script>
+// Mobile nav toggle
+document.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.querySelector(".nav-toggle");
+    var nav = document.querySelector(".nav-collapse");
+    if (toggle && nav) {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            nav.classList.toggle("opened");
+        });
+    }
+});
+</script>

@@ -5,11 +5,9 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "build": "eleventy",
+    "build": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=.eleventy.ts",
     "build-ghpages": "npx @11ty/eleventy --pathprefix=macroscopicentric.github.io",
-    "start": "npm run watch:eleventy & npm run watch:sass",
-    "watch:eleventy": "eleventy --serve",
-    "watch:sass": "sass assets/scss:_site/assets/css --watch"
+    "start": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=.eleventy.ts --serve"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +15,11 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.1",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
+    "jsx-async-runtime": "^1.0.2",
     "normalize.css": "^8.0.1",
-    "sass": "^1.77.4"
-  },
-  "dependencies": {
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tsx": "^4.19.4"
   }
 }
