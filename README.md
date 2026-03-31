@@ -3,5 +3,9 @@
 To run locally:
 
 ```sh
-npx @11ty/eleventy --serve
+npm run start
 ```
+
+## Deploy
+
+Push to `main`. A GitHub Action builds with Eleventy and deploys to GitHub Pages. Custom domain: macroscopicentric.net.
