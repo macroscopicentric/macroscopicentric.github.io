@@ -235,7 +235,13 @@ a:hover {
 MENU STYLING
 ***************/
 .nav-collapse {
-  z-index: 1;
+  position: relative;
+  z-index: 10;
+  max-height: 0;
+  overflow: hidden;
+  clear: both;
+  width: 100%;
+  transition: max-height 0.3s ease;
 }
 .nav-collapse ul {
   margin: 0;
@@ -255,14 +261,6 @@ MENU STYLING
   text-decoration: none;
   display: block;
   padding: 5px 2rem;
-}
-
-.nav-collapse {
-  max-height: 0;
-  overflow: hidden;
-  clear: both;
-  width: 100%;
-  transition: max-height 0.3s ease;
 }
 
 .nav-collapse.opened {
