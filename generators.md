@@ -5,3 +5,4 @@ permalink: "/generators.html"
 ---
 
 - [Cat Nickname Generator](/generators/cat-nicknames) — what should you call your cat?
+- [Gender Roles Generator](/generators/gender-roles) — for heterosexual couples
