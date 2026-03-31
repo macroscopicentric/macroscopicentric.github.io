@@ -1,0 +1,7 @@
+---
+layout: generator
+title: Generators
+permalink: "/generators.html"
+---
+
+- [Cat Nickname Generator](/generators/cat-nicknames) — what should you call your cat?

@@ -575,6 +575,16 @@ POST LIST STYLING
 }
 
 /***************
+GENERATOR STYLING
+***************/
+.generator-output {
+  font-size: 2.5em;
+  font-weight: 800;
+  color: seagreen;
+  margin: 1rem 0;
+}
+
+/***************
 800px+ BREAKPOINT
 ***************/
 @media only screen and (min-width: 800px) {

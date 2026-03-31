@@ -11,6 +11,10 @@
             "url": "/about"
         },
         {
+            "title": "Generators",
+            "url": "/generators"
+        },
+        {
             "title": "RSS",
             "url": "/feed.xml"
         }
