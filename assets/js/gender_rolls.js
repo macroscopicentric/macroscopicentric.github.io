@@ -15,6 +15,11 @@ var ROLES = [
     ['prone to gum disease', 'prone to cavities'],
     ['washes their face with bar soap', 'monopolizes an entire shelf in the shower'],
     ['will go for a walk for no reason', 'will only go for a walk if there\'s food at the end'],
+    ['cook', 'sous chef'],
+    ['Arctic', 'Antarctic'],
+    ['Frog', 'Toad'],
+    ['seitan', 'tempeh'],
+    ['maximalist', 'minimalist'],
 ];
 
 function pick(arr) {
