@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=.eleventy.ts",
-    "build-ghpages": "npx @11ty/eleventy --pathprefix=macroscopicentric.github.io",
+    "build-ghpages": "npx @11ty/eleventy",
     "start": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=.eleventy.ts --serve"
   },
   "keywords": [],
