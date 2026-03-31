@@ -52,6 +52,19 @@ function generate() {
     }
 
     document.getElementById('nickname').textContent = word;
+    window.location.hash = btoa(word);
 }
 
-generate();
+function loadFromHash() {
+    var hash = window.location.hash.slice(1);
+    if (!hash) return false;
+    try {
+        var word = atob(hash);
+        document.getElementById('nickname').textContent = word;
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+if (!loadFromHash()) generate();

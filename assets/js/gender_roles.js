@@ -25,6 +25,22 @@ function generate() {
     var pair = pick(ROLES);
     document.getElementById('role1').textContent = pair[0];
     document.getElementById('role2').textContent = pair[1];
+    window.location.hash = btoa(pair[0] + '|' + pair[1]);
 }
 
-generate();
+function loadFromHash() {
+    var hash = window.location.hash.slice(1);
+    if (!hash) return false;
+    try {
+        var decoded = atob(hash);
+        var parts = decoded.split('|');
+        if (parts.length !== 2) return false;
+        document.getElementById('role1').textContent = parts[0];
+        document.getElementById('role2').textContent = parts[1];
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+if (!loadFromHash()) generate();
