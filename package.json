@@ -5,9 +5,9 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=.eleventy.ts",
+    "build": "npx @11ty/eleventy",
     "build-ghpages": "npx @11ty/eleventy",
-    "start": "tsx node_modules/@11ty/eleventy/cmd.cjs --config=.eleventy.ts --serve"
+    "start": "npx @11ty/eleventy --serve"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,6 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.1",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1",
-    "tsx": "^4.19.4"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1"
   }
 }
