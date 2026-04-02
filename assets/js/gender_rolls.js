@@ -20,6 +20,10 @@ var ROLES = [
     ['Frog', 'Toad'],
     ['seitan', 'tempeh'],
     ['maximalist', 'minimalist'],
+    ['Kermit the Frog', 'Miss Piggy'],
+    ['Dorian', 'portrait'],
+    ['Dr. Jekyll', 'Mr. Hyde'],
+    ['Dr. Frankenstein', 'creature'],
 ];
 
 function pick(arr) {
