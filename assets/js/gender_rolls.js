@@ -24,6 +24,9 @@ var ROLES = [
     ['Dorian', 'portrait'],
     ['Dr. Jekyll', 'Mr. Hyde'],
     ['Dr. Frankenstein', 'creature'],
+    ['plans trips 6+ months in advance', 'two weeks into the future doesn\'t exist'],
+    ['C-3PO', 'R2-D2'],
+    ['Lumiere', 'Cogsworth'],
 ];
 
 function pick(arr) {
